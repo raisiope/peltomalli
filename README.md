@@ -137,7 +137,7 @@ Kaikki tiedostot sisältävät CRS‑tiedon:
 ## 1. Asenna riippuvuudet
 
 ```bash
-pip install numpy scipy rasterio geopandas shapely matplotlib
+pip install requests numpy scipy rasterio geopandas shapely matplotlib
 ```
 
 ## 2. Aja ohjelma
