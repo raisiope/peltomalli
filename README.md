@@ -188,21 +188,27 @@ Koska ne ovat kevyitä ja riippuvat vain verkon rakenteesta.
 
 # 📂 Hakemistorakenne
 ```bash
-peruslohko_kolmioverkko/
+peltomalli/
 │
-├── main.py
+├── peltomalli.py
 ├── cli.py
 ├── wfs_peruslohko.py
 ├── raster_height.py
 ├── mesh.py
 ├── geojson_outputs.py
-│
-└── 9750925303/
-    ├── peltomalli_kolmio.json
-    ├── peltomalli_verkko.json
-    ├── peltomalli_viivat.geojson
-    ├── peltomalli_virtaus.geojson
-    ├── peltomalli_kertyminen.geojson
+├── kuvat/
+│   ├── 3d.png
+│   ├── virtaus.png
+│   └── kertyminen.png
+├── MML/
+│   └── P3343B.tif
+└── PL/
+    └── 9750925303/
+        ├── peltomalli_kolmio.json
+        ├── peltomalli_verkko.json
+        ├── peltomalli_viivat.geojson
+        ├── peltomalli_virtaus.geojson
+        ├── peltomalli_kertyminen.geojson
 ```
 
 # 🧭 QGIS‑käyttö
