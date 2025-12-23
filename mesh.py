@@ -8,10 +8,10 @@ from collections import defaultdict
 def laske_sivun_pituus(p1, p2):
     return float(np.sqrt(np.sum((p1 - p2) ** 2)))
 
-def luo_suodatettu_mcp_json(pisteet_xyz, max_sivu=15.0):
+def luo_suodatettu_kolmio_json(pisteet_xyz, max_sivu=15.0):
     """
     Luo Delaunay-kolmioverkon, suodattaa liian pitkät sivut,
-    palauttaa MCP-tyylisen dictin: metadata + pisteet + kolmiot.
+    palauttaa kolmio-tyylisen dictin: metadata + pisteet + kolmiot.
     """
     pisteet_np = np.array(pisteet_xyz)
     if len(pisteet_np) < 3:
@@ -34,7 +34,7 @@ def luo_suodatettu_mcp_json(pisteet_xyz, max_sivu=15.0):
         if max(sivut) <= max_sivu:
             hyvaksytyt_kolmiot.append(simplex.tolist())
 
-    mcp_data = {
+    kolmio_data = {
         "metadata": {
             "pisteiden_maara": len(pisteet_np),
             "alkuperaiset_kolmiot": len(tri.simplices),
@@ -46,7 +46,7 @@ def luo_suodatettu_mcp_json(pisteet_xyz, max_sivu=15.0):
         "pisteet": pisteet_np.tolist(),
         "kolmiot": hyvaksytyt_kolmiot,
     }
-    return mcp_data
+    return kolmio_data
 
 # ---------- Rikastus: korkeudet, naapurit ----------
 

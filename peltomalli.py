@@ -8,16 +8,16 @@ from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 (import käytössä sivuva
 from cli import parse_args
 from wfs_peruslohko import hae_peruslohko_polygon
 from raster_height import kerää_korkeuspisteet
-from mesh import luo_suodatettu_mcp_json, enrich_mesh
+from mesh import luo_suodatettu_kolmio_json, enrich_mesh
 from geojson_outputs import (
     kirjoita_flow_viivat,
     kirjoita_virtausverkko,
     kirjoita_kertyminen,
 )
 
-def nayta_3d_pinta(mcp_data):
-    pts = np.array(mcp_data["pisteet"])
-    triangles = np.array(mcp_data["kolmiot"])
+def nayta_3d_pinta(kolmio_data):
+    pts = np.array(kolmio_data["pisteet"])
+    triangles = np.array(kolmio_data["kolmiot"])
 
     fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection="3d")
@@ -50,16 +50,16 @@ def main():
 
     print("Peruslohko:", PL)
     print("Tiedosto:", tif_tiedosto)
-    mcp_polku = f"PL/{PL}/peltomalli_mcp.json"
+    kolmio_polku = f"PL/{PL}/peltomalli_kolmio.json"
 
-    # Jos MCP-data on jo olemassa, lue se ja ohita raskas laskenta
-    if os.path.exists(mcp_polku):
-        print("peltomalli_mcp.json löytyi — ohitetaan MCP-datan rakentaminen.")
-        with open(mcp_polku, "r", encoding="utf-8") as f:
-            mcp_data = json.load(f)
+    # Jos kolmio-data on jo olemassa, lue se ja ohita raskas laskenta
+    if os.path.exists(kolmio_polku):
+        print("peltomalli_kolmio.json löytyi — ohitetaan kolmio-datan rakentaminen.")
+        with open(kolmio_polku, "r", encoding="utf-8") as f:
+            kolmio_data = json.load(f)
 
-    else:
-        print("peltomalli_mcp.json ei löytynyt — rakennetaan MCP-data...")
+    else:   
+        print("peltomalli_kolmio.json ei löytynyt — rakennetaan kolmio-data...")
 
         # 1) Hae peruslohkon polygon
         polygon = hae_peruslohko_polygon(PL)
@@ -67,15 +67,13 @@ def main():
         # 2) Kerää korkeuspisteet rasterista
         pisteet = kerää_korkeuspisteet(polygon, tif_tiedosto, ruutu=10, etaisyys_m=5.0)
 
-        # 3) Kolmioverkko (MCP-tyylinen JSON)
-        mcp_data = luo_suodatettu_mcp_json(pisteet, max_sivu=15.0)
+        # 3) Kolmioverkko (JSON)
+        kolmio_data = luo_suodatettu_kolmio_json(pisteet, max_sivu=15.0)
 
-        # 4) Tallenna MCP-data
-        with open(mcp_polku, "w", encoding="utf-8") as f:
-            json.dump(mcp_data, f, indent=2)
-
-        print(f"Valmis! {mcp_polku}")
-
+        # 4) Tallenna kolmio-data
+        with open(kolmio_polku, "w", encoding="utf-8") as f:
+            json.dump(kolmio_data, f, indent=2)
+        print(f"Valmis! {kolmio_polku}")
     # 5) Rikastettu verkko (pisteet + kolmiot + naapurit + korkeudet)
     verkko_polku = f"PL/{PL}/peltomalli_verkko.json"
 
@@ -87,7 +85,7 @@ def main():
 
     else:
         print("peltomalli_verkko.json ei löytynyt — lasketaan verkko...")
-        enriched = enrich_mesh(mcp_data)
+        enriched = enrich_mesh(kolmio_data)
 
         with open(verkko_polku, "w", encoding="utf-8") as f:
             json.dump(enriched, f, indent=2)
@@ -104,7 +102,7 @@ def main():
 
     # 7) 3D-visuaali tarvittaessa
     if visual_3d:
-        nayta_3d_pinta(mcp_data)
+        nayta_3d_pinta(kolmio_data)
 
 if __name__ == "__main__":
     main()
