@@ -1,0 +1,14 @@
+[project]
+name = "peltomalli"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "geopandas>=1.1.1",
+    "matplotlib>=3.10.8",
+    "rasterio>=1.4.4",
+    "requests>=2.32.5",
+    "scipy>=1.16.3",
+    "shapely>=2.1.2",
+]
