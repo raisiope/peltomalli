@@ -254,18 +254,16 @@ peltomalli/
 - hydrologiseen mallinnukseen
 
 
-### Esimerkki kuvat
+# 🖼️ Esimerkki kuvat
+### 🧊 Esimerkki: Peltomallin 3D
 
 ![Esimerkki: Peltomallin 3D](https://github.com/raisiope/peltomalli/blob/main/kuvat/3d.png "Peltomallin 3D")
 
-*Esimerkki: Peltomallin 3D*
+### 📐 Esimerkki: Peltomallin pintavalunta
 
 
 ![Esimerkki: Peltomallin pintavalunta](https://github.com/raisiope/peltomalli/blob/main/kuvat/virtaus.png "Peltomallin pintavalunta")
 
-*Esimerkki: Peltomallin pintavalunta*
-
+### 🌧️ Esimerkki: Peltomallin veden kertyminen pintavalunnasta
 
 ![Esimerkki: Peltomallin veden kertyminen pintavalunnasta ](https://github.com/raisiope/peltomalli/blob/main/kuvat/kertyminen.png "Peltomallin veden kertyminen pintavalunnasta")
-
-*Esimerkki: Peltomallin veden kertyminen pintavalunnasta*
